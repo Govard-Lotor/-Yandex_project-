@@ -19,7 +19,7 @@ loading = Loading()
 load_marker = 0     # 0-загрузка  1-текст  2-старт 3-stop
 
 menu = Menu(main_window)
-menu_marker = 0     # 1-отобразить меню  2-ожидать действий
+menu_marker = 0     # 1-отобразить меню  2-ожидать действий 3-рисовать 4-стоп
 
 keys = pygame.key.get_pressed()
 
@@ -36,10 +36,26 @@ while True:
             if pygame.key.get_pressed()[pygame.K_f]:
                 menu_marker = 1
 
-    if menu_marker:
+    if menu_marker == 1:
         menu.on_menu()
+        menu_marker = 2
 
+    if menu_marker >= 2:
+        if menu.check_menu() == 1.1:
+            menu_marker = 3.1
+        elif menu.check_menu() == 2.1:
+            menu_marker = 3.2
+        else:
+            menu.on_menu()
+            menu_marker = 2
+        if menu_marker == 3.1:
+            pygame.draw.rect(main_window, (53, 161, 31), (-6, 100 - 10, 2000, 72 + 20), 3)
+        if menu_marker == 3.2:
+            pygame.draw.rect(main_window, (53, 161, 31), (-6, 800 - 10, 2000, 72 + 20), 3)
 
+        if pygame.mouse.get_pressed()[0]:
+            if menu.exit():
+                exit()
 
 
     pygame.display.flip()
