@@ -7,9 +7,6 @@ clock = pygame.time.Clock()
 
 counter = 0
 
-gun_shoot_sound = pygame.mixer.Sound('sounds/оружие/пистолет_выстрел.mp3')
-gun_shoot_animation = [pygame.image.load(f'анимация/стрельба/sprite_shoot{i}.png') for i in range(6)]
-
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, filename, speed):
@@ -41,7 +38,3 @@ class Player(pygame.sprite.Sprite):
         radius, angel = direction.as_polar()
         self.image = pygame.transform.rotate(self.orig, - angel + 90)
         self.rect = self.image.get_rect(center=self.rect.center)
-
-    def shoot_gun(self, frame):
-        self.image = pygame.image.load(frame).convert_alpha()
-        self.image = pygame.transform.scale(self.image, (100, 100))

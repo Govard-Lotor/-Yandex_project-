@@ -1,11 +1,9 @@
 import pygame
 from player import Player
 from loading_screen import Loading
-from main_menu import Main_menu
+from main_menu import Menu
 pygame.init()
 
-def nothing():
-    pass
 
 main_window = pygame.display.set_mode((1920, 1080))
 
@@ -18,26 +16,34 @@ white = 255, 255, 255
 red = 255, 0, 0
 
 loading = Loading()
-load_marker = 0     # 0 - нужно отобразить стартовый экран, 1 - до игры, 2 - во время игры
+load_marker = 0     # 0-загрузка  1-текст  2-старт 3-stop
 
-menu = Main_menu(main_window)
-menu_marker = 0
+menu = Menu(main_window)
+menu_marker = 0     # 1-отобразить меню  2-ожидать действий
 
 keys = pygame.key.get_pressed()
 
 
 while True:
-    FPS += 1
+    if load_marker == 0:
+        load_marker = loading.one_step(main_window)
 
-    for event in pygame.event.get():
+    if load_marker == 1:
+        load_marker = loading.second_step(main_window)
 
-        if pygame.key.get_pressed()[pygame.K_f]:
-            exit()
+    if load_marker == 3:
+        for event in pygame.event.get():
+            if pygame.key.get_pressed()[pygame.K_f]:
+                menu_marker = 1
+
+    if menu_marker:
+        menu.on_menu()
+
+
 
 
     pygame.display.flip()
     clock.tick(fps)
-    if FPS == 60:
-        FPS = 0
+
 
 #event.type == pygame.QUIT

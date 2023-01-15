@@ -54,7 +54,7 @@ class Loading:
         self.marker = 0
         self.counter = 5
 
-        while self.marker != 23:
+        while self.marker != 37:
             if FPS % self.counter == 0 and self.marker_one == 1:
                 x_x0 += 10 + 24
                 pygame.draw.rect(self.field, green, (x_x0, y_y0, 25, 30))
@@ -62,9 +62,9 @@ class Loading:
             if FPS == 60:
                 FPS = 0
                 self.marker_one = 1
-            if self.marker == 10:
-                self.counter = 10
             if self.marker == 20:
+                self.counter = 10
+            if self.marker == 30:
                 self.counter = 20
 
             FPS += 1
@@ -73,6 +73,8 @@ class Loading:
             clock.tick(fps)
 
             self.screen.blit(self.field, (0, 0))
+
+        return 1
 
     def second_step(self, screen):
         self.screen = screen
@@ -441,3 +443,5 @@ class Loading:
             FPS += 1
             pygame.display.flip()
             clock.tick(fps)
+
+        return 3
