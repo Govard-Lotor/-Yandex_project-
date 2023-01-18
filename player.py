@@ -9,13 +9,16 @@ counter = 0
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, filename, speed):
+    def __init__(self, x, y, speed):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(filename).convert_alpha()
+        self.image = pygame.image.load('textures/player.png')
         self.image = pygame.transform.scale(self.image, (100, 100))
         self.rect = self.image.get_rect(center=(x, y))
         self.speed = speed
         self.orig = self.image
+
+        self.hp = 100
+        self.bulits = 7
 
     def update(self, w_h):
         keys = pygame.key.get_pressed()
@@ -38,3 +41,7 @@ class Player(pygame.sprite.Sprite):
         radius, angel = direction.as_polar()
         self.image = pygame.transform.rotate(self.orig, - angel + 90)
         self.rect = self.image.get_rect(center=self.rect.center)
+
+    def shoot(self):
+        return self.rect.center
+

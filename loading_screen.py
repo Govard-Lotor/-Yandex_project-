@@ -6,6 +6,7 @@ clock = pygame.time.Clock()
 
 black = (0, 0, 0)
 green = (53, 161, 31)
+yellow = (214, 169, 12)
 
 keyboard_sound = pygame.mixer.music.load('sounds/interface/keyboard.mp3')
 
@@ -445,3 +446,123 @@ class Loading:
             clock.tick(fps)
 
         return 3
+
+    def third_step(self, screen):
+
+        self.screen = screen
+        self.width = screen.get_width()
+        self.height = screen.get_height()
+
+        font = pygame.font.Font(None, 30)
+        self.field = pygame.Surface((self.width, self.height))
+        self.field.fill(black)
+
+        self.collection = []
+
+        text_x0 = self.width // 15
+        text_y0 = self.height // 20
+
+        text_x, text_y = text_x0, text_y0
+
+        self.text = '1640 часов     '
+
+        self.counter = 0
+        self.len = len(self.text) + 1
+        FPS = 0
+
+        pygame.mixer.music.play(-1)
+        while self.len != 0:
+
+            if FPS % 5 == 0:
+                self.field.fill(black)
+                stroka = f'{"".join(self.text[0:self.counter])}'
+                text = font.render(stroka, True, yellow)
+                self.counter += 1
+                self.len -= 1
+                self.field.blit(text, (text_x, text_y))
+                screen.blit(self.field, (0, 0))
+
+            if FPS == 60:
+                FPS = 0
+            FPS += 1
+
+            if self.len == 0:
+                self.collection.append(stroka)
+
+            if self.len - 5 == 0:
+                pygame.mixer.music.stop()
+
+            pygame.display.flip()
+            clock.tick(fps)
+
+        text_y += 60
+
+        self.text = 'K-12     '
+
+        self.counter = 0
+        self.len = len(self.text) + 1
+        FPS = 0
+
+        while self.len != 0:
+            self.field.fill(black)
+            text_y_dop = text_y0
+            for i in self.collection:
+                text = font.render(i, True, yellow)
+                self.field.blit(text, (text_x0, text_y_dop))
+                text_y_dop += 60
+
+            if FPS % 5 == 0:
+                stroka = f'{"".join(self.text[0:self.counter])}'
+                text = font.render(stroka, True, yellow)
+                self.counter += 1
+                self.len -= 1
+                self.field.blit(text, (text_x, text_y))
+                screen.blit(self.field, (0, 0))
+            if FPS == 60:
+                FPS = 0
+
+            if self.len == 0:
+                self.collection.append(stroka)
+
+            FPS += 1
+            pygame.display.flip()
+            clock.tick(fps)
+
+        text_y += 60
+
+        self.text = 'Лейтенант Саймон Райли           '
+
+        self.counter = 0
+        self.len = len(self.text) + 1
+        FPS = 0
+
+        pygame.mixer.music.play(-1)
+        while self.len != 0:
+            self.field.fill(black)
+            text_y_dop = text_y0
+            for i in self.collection:
+                text = font.render(i, True, yellow)
+                self.field.blit(text, (text_x0, text_y_dop))
+                text_y_dop += 60
+
+            if FPS % 5 == 0:
+                stroka = f'{"".join(self.text[0:self.counter])}'
+                text = font.render(stroka, True, yellow)
+                self.counter += 1
+                self.len -= 1
+                self.field.blit(text, (text_x, text_y))
+                screen.blit(self.field, (0, 0))
+            if FPS == 60:
+                FPS = 0
+
+            if self.len == 0:
+                self.collection.append(stroka)
+
+            if self.len - 5 == 0:
+                pygame.mixer.music.stop()
+
+            FPS += 1
+            pygame.display.flip()
+            clock.tick(fps)
+
+        return 4

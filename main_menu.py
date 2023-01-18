@@ -82,6 +82,16 @@ class Menu:
         if x2 < x < x2 + w2 and y2 < y < y2 + h2:
             return 1
 
+    def start(self):
+        button_one = [self.width // 4, self.height // 15, 100, 100]
+
+        x1, y1 = button_one[2], button_one[3]
+        w1, h1 = button_one[0], button_one[1]
+        x, y = pygame.mouse.get_pos()
+
+        if x1 < x < x1 + w1 and y1 < y < y1 + h1:
+            return 1
+
 
 
 
