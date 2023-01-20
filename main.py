@@ -17,9 +17,12 @@ FPS = 0
 white = 255, 255, 255
 red = 255, 0, 0
 
+
 player = Player(990, 500, 5)
+main_window.fill((0, 0, 0))
 
 field = Field(main_window)
+main_window.fill((0, 0, 0))
 
 loading = Loading()
 load_marker = 0      # 0-загрузка  1-текст  2-старт 3-stop 4-off
