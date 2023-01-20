@@ -1,8 +1,8 @@
 import pygame
 from player import Player
 from bullet import Bullet
+from enemies import Enemies
 
-player = Player(990, 500, 5)
 
 clock = pygame.time.Clock()
 
@@ -12,11 +12,11 @@ guide = pygame.image.load('arts/game_ruls.png')
 pause_im = pygame.image.load('arts/game_pause.png')
 screen.blit(im, (0, 0))
 
-bullet = Bullet()
-
 shoot_sound = pygame.mixer.Sound('sounds/guns/shoot.mp3')
 reload_sound = pygame.mixer.Sound('sounds/guns/reload.mp3')
 
+player = Player(990, 500, 5)
+bullet = Bullet()
 
 
 class Field:
@@ -53,7 +53,6 @@ class Field:
 
         if pygame.mouse.get_pressed()[0] and self.pause == 1 and not self.shoot and self.bullets > 0:
             shoot_sound.play()
-            player.shoot(self.FPS)
             bullet.set_coor(pygame.mouse.get_pos(), player.coord())
             self.shoot = 1
 
@@ -69,6 +68,7 @@ class Field:
             if player.reload(self.FPS):
                 self.bullets = 7
                 self.reload_sound = 1
+                self.shoot = 0
 
         if self.pause:
             player.update((1920, 1080))

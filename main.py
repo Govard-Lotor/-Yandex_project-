@@ -22,10 +22,10 @@ player = Player(990, 500, 5)
 field = Field(main_window)
 
 loading = Loading()
-load_marker = 4      # 0-загрузка  1-текст  2-старт 3-stop 4-off
+load_marker = 0      # 0-загрузка  1-текст  2-старт 3-stop 4-off
 
 menu = Menu(main_window)
-menu_marker = 4     # 1-отобразить меню  2-ожидать действий 3-рисовать 4-стоп
+menu_marker = 0     # 1-отобразить меню  2-ожидать действий 3-рисовать 4-стоп
 
 game_start = 0
 
@@ -88,9 +88,5 @@ while True:
                 game_start = 0
                 load_marker, menu_marker, game_start = 3, 2, 0
 
-
     pygame.display.flip()
     clock.tick(fps)
-
-
-#event.type == pygame.QUIT

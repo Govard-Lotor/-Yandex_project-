@@ -65,15 +65,3 @@ class Player(pygame.sprite.Sprite):
                 return 1
             else:
                 return 0
-
-    def shoot(self, frame):
-        if frame % 10 == 0:
-            self.image = pygame.image.load(f'animation/shooting/sprite_shoot{self.rf}.png')
-            self.image = pygame.transform.scale(self.image, (100, 100))
-            self.orig = self.image
-            self.rf += 1
-            if self.rf == 5:
-                self.rf = 0
-                self.image = pygame.image.load('textures/player.png')
-                self.image = pygame.transform.scale(self.image, (100, 100))
-                self.orig = self.image

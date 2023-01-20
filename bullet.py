@@ -1,5 +1,4 @@
 import pygame
-from player import Player
 pygame.init()
 
 fps = 60
@@ -8,10 +7,12 @@ clock = pygame.time.Clock()
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
         self.speed = 10
         self.k = 0
         self.x1 = 0
         self.y1 = 0
+        self.image = pygame.Surface((8, 8))
 
     def set_coor(self, coor, rect):
         self.x1, self.y1 = coor[0], coor[1]
