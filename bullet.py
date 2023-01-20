@@ -1,5 +1,5 @@
 import pygame
-from pygame.math import Vector2
+from player import Player
 pygame.init()
 
 fps = 60

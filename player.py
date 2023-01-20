@@ -7,6 +7,9 @@ clock = pygame.time.Clock()
 
 counter = 0
 
+steps_1_sound = pygame.mixer.Sound('sounds/player/steps_1.mp3')
+steps_2_sound = pygame.mixer.Sound('sounds/player/steps_2.mp3')
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, speed):
@@ -18,7 +21,10 @@ class Player(pygame.sprite.Sprite):
         self.orig = self.image
 
         self.hp = 100
-        self.bulits = 7
+
+        self.steps = 0
+        self.fr = 1
+        self.rf = 0
 
     def update(self, w_h):
         keys = pygame.key.get_pressed()
@@ -42,6 +48,32 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.rotate(self.orig, - angel + 90)
         self.rect = self.image.get_rect(center=self.rect.center)
 
-    def shoot(self):
+    def coord(self):
         return self.rect.center
 
+    def reload(self, frame):
+        if frame % 6 == 0:
+            self.image = pygame.image.load(f'animation/gun_reload/sprite_0{self.fr}.png')
+            self.image = pygame.transform.scale(self.image, (100, 100))
+            self.orig = self.image
+            self.fr += 1
+            if self.fr == 9:
+                self.fr = 1
+                self.image = pygame.image.load('textures/player.png')
+                self.image = pygame.transform.scale(self.image, (100, 100))
+                self.orig = self.image
+                return 1
+            else:
+                return 0
+
+    def shoot(self, frame):
+        if frame % 10 == 0:
+            self.image = pygame.image.load(f'animation/shooting/sprite_shoot{self.rf}.png')
+            self.image = pygame.transform.scale(self.image, (100, 100))
+            self.orig = self.image
+            self.rf += 1
+            if self.rf == 5:
+                self.rf = 0
+                self.image = pygame.image.load('textures/player.png')
+                self.image = pygame.transform.scale(self.image, (100, 100))
+                self.orig = self.image

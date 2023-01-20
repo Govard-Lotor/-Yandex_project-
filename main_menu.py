@@ -47,8 +47,8 @@ class Menu:
         pygame.display.flip()
 
     def check_menu(self):
-        button_one = [self.width // 4, self.height // 15, 100, 100]
-        button_two = [self.width // 4, self.height // 15, 100, 600]
+        button_one = [1920 // 4, 1080 // 15, 100, 100]
+        button_two = [1920 // 4, 1800 // 15, 100, 600]
 
         x1, y1 = button_one[2], button_one[3]
         w1, h1 = button_one[0], button_one[1]
@@ -92,12 +92,8 @@ class Menu:
         if x1 < x < x1 + w1 and y1 < y < y1 + h1:
             return 1
 
-
-
-
         # if marker:
         #     pygame.draw.rect(self.screen, green, (x1 - 10, y1 - 10, w1 + 20, h1 + 20), 3)
         #
         # pygame.display.flip()
         # clock.tick(fps)
-

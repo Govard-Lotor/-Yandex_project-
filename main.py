@@ -83,6 +83,10 @@ while True:
 
     if game_start:
         field.draw()
+        if pygame.key.get_pressed()[pygame.K_e]:
+            if field.game_stop():
+                game_start = 0
+                load_marker, menu_marker, game_start = 3, 2, 0
 
 
     pygame.display.flip()
